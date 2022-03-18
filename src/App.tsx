@@ -1,18 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Login from "./Login";
 import {
     BrowserRouter as Router,
     Routes,
     Route,
 } from "react-router-dom";
+import { mainTheme } from './theme';
+import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline } from "@mui/material";
+import WhoIsWatching from "./WhoIsWatching";
+import MainMenu from "./MainMenu";
+import { LoadingDataMovies } from "./actions/fetchApi";
 
 export default () => {
+
+    useEffect(() => {
+        LoadingDataMovies();
+    }, )
+    
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Login />}></Route>
-                <Route path="/login" element={<Login />}></Route>
-            </Routes>
-        </Router>
+        <ThemeProvider theme={mainTheme.dark}>
+            <CssBaseline />
+            <Router>
+                <Routes>
+                    <Route path="/" element={<MainMenu />}></Route>
+                    <Route path="/login" element={<Login />}></Route>
+                    <Route path="/whoiswatching" element={<WhoIsWatching />}></Route>
+                </Routes>
+            </Router>
+        </ThemeProvider>
     );
 }
