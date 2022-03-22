@@ -1022,7 +1022,7 @@
     "core-js-pure" "^3.20.2"
     "regenerator-runtime" "^0.13.4"
 
-"@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.13.10", "@babel/runtime@^7.15.4", "@babel/runtime@^7.16.3", "@babel/runtime@^7.17.0", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.13.10", "@babel/runtime@^7.15.4", "@babel/runtime@^7.16.3", "@babel/runtime@^7.17.0", "@babel/runtime@^7.17.2", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
   "integrity" "sha512-hzeyJyMA1YGdJTuWU0e/j4wKXrU4OMFvY2MSlaI9B7VQb0r5cxTE3EAIS2Q7Tn2RIcDkRvTA/v2JsAEhxe99uw=="
   "resolved" "https://registry.npmjs.org/@babel/runtime/-/runtime-7.17.2.tgz"
   "version" "7.17.2"
@@ -1418,12 +1418,12 @@
     "prop-types" "^15.7.2"
     "react-is" "^17.0.2"
 
-"@mui/icons-material@^5.4.2":
-  "integrity" "sha512-7c+G3jBT+e+pN0a9DJ0Bd8Kr1Vy6os5Q1yd2aXcwuhlRI3uzJBLJ8sX6FSWoh5DSEBchb7Bsk1uHz6U0YN9l+Q=="
-  "resolved" "https://registry.npmjs.org/@mui/icons-material/-/icons-material-5.4.2.tgz"
-  "version" "5.4.2"
+"@mui/icons-material@^5.4.4":
+  "integrity" "sha512-7zoRpjO8vsd+bPvXq6rtXu0V8Saj70X09dtTQogZmxQKabrYW3g7+Yym7SCRA7IYVF3ysz2AvdQrGD1P/sGepg=="
+  "resolved" "https://registry.npmjs.org/@mui/icons-material/-/icons-material-5.4.4.tgz"
+  "version" "5.4.4"
   dependencies:
-    "@babel/runtime" "^7.17.0"
+    "@babel/runtime" "^7.17.2"
 
 "@mui/material@^5.0.0", "@mui/material@^5.4.1":
   "integrity" "sha512-SxAT43UAjFTBBpJrN+oGrv40xP1uCa5Z49NfHt3m93xYeFzbxKOk0V9IKU7zlUjbsaVQ0i+o24yF5GULZmynlA=="
@@ -1531,6 +1531,16 @@
   "integrity" "sha512-92FRmppjjqz29VMJ2dn+xdyXZBrMlE42AV6Kq6BwjWV7CNUW1hs2FtxSNLQE+gJhaZ6AAmYuO9y8dshhcBl7vA=="
   "resolved" "https://registry.npmjs.org/@popperjs/core/-/core-2.11.2.tgz"
   "version" "2.11.2"
+
+"@reduxjs/toolkit@^1.8.0":
+  "integrity" "sha512-cdfHWfcvLyhBUDicoFwG1u32JqvwKDxLxDd7zSmSoFw/RhYLOygIRtmaMjPRUUHmVmmAGAvquLLsKKU/677kSQ=="
+  "resolved" "https://registry.npmjs.org/@reduxjs/toolkit/-/toolkit-1.8.0.tgz"
+  "version" "1.8.0"
+  dependencies:
+    "immer" "^9.0.7"
+    "redux" "^4.1.2"
+    "redux-thunk" "^2.4.1"
+    "reselect" "^4.1.5"
 
 "@rollup/plugin-babel@^5.2.0":
   "integrity" "sha512-9uIC8HZOnVLrLHxayq/PTzw+uS25E14KPUBh5ktF+18Mjo5yK0ToMMx6epY0uEgkjwJw0aBW4x2horYXh8juWw=="
@@ -7433,7 +7443,7 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
   "version" "17.0.2"
 
-"react-redux@^7.2.0":
+"react-redux@^7.2.0", "react-redux@^7.2.1 || ^8.0.0-beta", "react-redux@^7.2.6":
   "integrity" "sha512-10RPdsz0UUrRL1NZE0ejTkucnclYSgXp5q+tB5SWx2qeG2ZJQJyymgAhwKy73yiL/13btfB6fPr+rgbMAaZIAQ=="
   "resolved" "https://registry.npmjs.org/react-redux/-/react-redux-7.2.6.tgz"
   "version" "7.2.6"
@@ -7530,7 +7540,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@*", "react@^16.8.0 || ^17.0.0", "react@^16.8.3 || ^17", "react@^16.8.5 || ^17.0.0", "react@^17.0.0", "react@^17.0.2", "react@>= 16", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0", "react@17.0.2":
+"react@*", "react@^16.8.0 || ^17.0.0", "react@^16.8.3 || ^17", "react@^16.8.5 || ^17.0.0", "react@^16.9.0 || ^17.0.0 || 18.0.0-beta", "react@^17.0.0", "react@^17.0.2", "react@>= 16", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
@@ -7582,7 +7592,17 @@
     "indent-string" "^4.0.0"
     "strip-indent" "^3.0.0"
 
-"redux@^4.0.0", "redux@^4.0.4":
+"redux-devtools-extension@^2.13.9":
+  "integrity" "sha512-cNJ8Q/EtjhQaZ71c8I9+BPySIBVEKssbPpskBfsXqb8HJ002A3KRVHfeRzwRo6mGPqsm7XuHTqNSNeS1Khig0A=="
+  "resolved" "https://registry.npmjs.org/redux-devtools-extension/-/redux-devtools-extension-2.13.9.tgz"
+  "version" "2.13.9"
+
+"redux-thunk@^2.4.1":
+  "integrity" "sha512-OOYGNY5Jy2TWvTL1KgAlVy6dcx3siPJ1wTq741EPyUKfn6W6nChdICjZwCd0p8AZBs5kWpZlbkXW2nE/zjUa+Q=="
+  "resolved" "https://registry.npmjs.org/redux-thunk/-/redux-thunk-2.4.1.tgz"
+  "version" "2.4.1"
+
+"redux@^3.1.0 || ^4.0.0", "redux@^4", "redux@^4.0.0", "redux@^4.0.4", "redux@^4.1.2":
   "integrity" "sha512-SH8PglcebESbd/shgf6mii6EIoRM0zrQyjcuQ+ojmfxjTtE0z9Y8pa62iA/OJ58qjP6j27uyW4kUF4jl/jd6sw=="
   "resolved" "https://registry.npmjs.org/redux/-/redux-4.1.2.tgz"
   "version" "4.1.2"
@@ -7685,6 +7705,11 @@
   "integrity" "sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8="
   "resolved" "https://registry.npmjs.org/requires-port/-/requires-port-1.0.0.tgz"
   "version" "1.0.0"
+
+"reselect@^4.1.5":
+  "integrity" "sha512-uVdlz8J7OO+ASpBYoz1Zypgx0KasCY20H+N8JD13oUMtPvSHQuscrHop4KbXrbsBcdB9Ds7lVK7eRkBIfO43vQ=="
+  "resolved" "https://registry.npmjs.org/reselect/-/reselect-4.1.5.tgz"
+  "version" "4.1.5"
 
 "resolve-cwd@^3.0.0":
   "integrity" "sha512-OrZaX2Mb+rJCpH/6CpSqt9xFVpN++x01XnN2ie9g6P5/3xelLAkXWVADpdz1IHD/KFfEXyE6V0U01OQ3UO2rEg=="

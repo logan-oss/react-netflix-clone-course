@@ -1,7 +1,6 @@
 import { setPopularMovies, setTopMovies, setTrendingMovies } from "../store/slice/movieSlice";
 import store from "../store/store";
 
-
 const TRENDING_MOVIES = "TRENDING_MOVIES";
 const POPULAR_MOVIES = "POPULAR_MOVIES";
 const TOP_RATED_MOVIES = "TOP_RATED_MOVIES";

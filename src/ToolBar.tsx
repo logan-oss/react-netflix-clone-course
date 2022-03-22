@@ -82,9 +82,7 @@ export default function ToolBar(props: ToolbarInterface) {
                                             {link}
                                         </Link>)
                                     }
-                                </Box>
-
-                                ,
+                                </Box>,
                                 <Box sx={{ flexGrow: 0, display: "inline-flex" }}>
                                     <Stack direction="row" spacing={1}>
                                         <Search>

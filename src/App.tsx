@@ -11,6 +11,7 @@ import { CssBaseline } from "@mui/material";
 import WhoIsWatching from "./WhoIsWatching";
 import MainMenu from "./MainMenu";
 import { LoadingDataMovies } from "./actions/fetchApi";
+import AddProfile from "./AddProfile";
 
 export default () => {
 
@@ -27,6 +28,7 @@ export default () => {
                     <Route path="/" element={<MainMenu />}></Route>
                     <Route path="/login" element={<Login />}></Route>
                     <Route path="/whoiswatching" element={<WhoIsWatching />}></Route>
+                    <Route path="/addProfile" element={<AddProfile />} ></Route>
                 </Routes>
             </Router>
         </ThemeProvider>

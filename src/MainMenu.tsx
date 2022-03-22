@@ -17,12 +17,12 @@ export default function MainMenu() {
     }
 
     const Movies = useSelector((state: State) => state.movies);
-
+    console.log(Movies);
 
     return (
         <Box bgcolor="primary">
             <ToolBar display={""} />
-            {Movies.popularMovies.length !== 0 &&
+            {((Movies.popularMovies.length !== 0)) &&
                 <>
                     <Box sx={{
                         position: 'relative',
