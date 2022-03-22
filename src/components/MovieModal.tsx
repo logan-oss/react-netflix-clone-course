@@ -9,12 +9,10 @@ import { Avatar, Grid, Stack } from '@mui/material';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import { useEffect } from "react";
+import { MovieInterface } from '../interfaces/MovieInterface';
 
 const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: 'absolute',
     width: "55%",
     minHeight: "100vh",
     bgcolor: "#383737",
@@ -23,43 +21,63 @@ const style = {
 
 export default function MovieModal(props: any) {
     const [open, setOpen] = React.useState(true);
-    const [similarMovies, setSimilarMovies] = React.useState([]);
+    const [similarMovies, setSimilarMovies] = React.useState(new Array<MovieInterface>());
     const handleClose = () => props.setModal();
-    const mois = ["javier", "février", "mars", "avril", "mai", "juin", "juillet", "aout","septembre","octobre","novembre","decembre"]
+    const mois = ["javier", "février", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "decembre"]
 
-    console.log(similarMovies);
-    
+    //console.log(similarMovies);
+
 
     useEffect(() => {
-        fetch("https://api.themoviedb.org/3/movie/"+ props.data.id + "/similar?api_key=" + process.env.REACT_APP_API_KEY + "&language=fr-FR")
-        .then(res => res.json())
-        .then(
-            (result) => {  
-                setSimilarMovies(result.results);
-            },
-        ) 
-    }, [] );
+        fetch("https://api.themoviedb.org/3/movie/" + props.data.id + "/similar?api_key=" + process.env.REACT_APP_API_KEY + "&language=fr-FR")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setSimilarMovies(result.results.slice(0,6));
+                },
+            )
+    }, []);
 
 
     return (
         <Modal
             open={open}
             onClose={handleClose}
-            sx={{overflow:'auto'}}
+            sx={{
+                overflow: 'auto',
+                display: 'flex',
+                justifyContent: 'center',
+            }}
         >
             <Box sx={style}>
-                <Box bgcolor="red" sx={{
-                    width: "100%",
-                    height: "70vh",
-                    backgroundImage: `url(https://image.tmdb.org/t/p/original/${props.data.backdrop_path})`,
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover",
-                    mb: 2,
+                <Box sx={{
+                    position: 'relative',
                     display: 'flex',
-                    alignContent: 'flex-end',
-                    position: "relative"
-                }} >
-                    <Box sx={{ display: "inline", position: 'absolute', bottom: "10%" }}>
+                    alignItems: 'end',
+                    justifyContent: 'center',
+                    height: "50vh",
+                    '&::after': {
+                        position: 'absolute',
+                        content: '" "',
+                        width: '100%',
+                        height: '100%',
+                        top: 0,
+                        left: 0,
+                        backgroundImage: `url(https://image.tmdb.org/t/p/original/${props.data.backdrop_path})`,
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                    }
+
+                }}>
+                    <Grid
+                        container
+                        direction="row"
+                        justifyContent="space-between"
+                        alignItems="space-between"
+                        ml={5}
+                        mb={5}
+                        zIndex={200}
+                    >
                         <Box sx={{ ml: 5 }}>
                             <Button startIcon={<PlayArrow />} sx={{ fontWeight: "bold", bgcolor: "white", color: "black" }} variant="contained">Lecture</Button>
                             <Stack direction="row" spacing={1} sx={{ display: "inline", ml: 1 }}>
@@ -80,15 +98,15 @@ export default function MovieModal(props: any) {
                                 </Button>
                             </Stack>
                         </Box>
-                    </Box>
+                    </Grid>
                 </Box>
 
-                <Box sx={{ ml: 5, mr:5 }}>
-                    <Grid container spacing={2} sx={{mb:3}}>
+                <Box sx={{ ml: 5, mr: 5 }}>
+                    <Grid container spacing={2} sx={{ mb: 3 }}>
                         <Grid item xs={8}>
                             <Typography>
                                 {new Date(props.data.release_date).getFullYear()} &nbsp;
-                                {(Math.floor(props.data.runtime / 60) )} h {props.data.runtime % 60} min <br />
+                                {(Math.floor(props.data.runtime / 60))} h {props.data.runtime % 60} min <br />
                                 <b>Dernier jour sur Netflix : {mois[new Date().getMonth()]} {new Date().getDate()}</b>
                             </Typography>
                             <br />
@@ -97,28 +115,65 @@ export default function MovieModal(props: any) {
                             </Typography>
 
                         </Grid>
-                        <Grid item xs={4} sx={{fontSize: "15px"}}>
-                            Production: <b>{props.data.production_companies.map((pc : any) => pc.name+", ")}</b> <br />
-                            Genres: <b>{props.data.genres.map((g : any) => g.name+", ")}</b> <br />
+                        <Grid item xs={4} sx={{ fontSize: "15px" }}>
+                            Production: <b>{props.data.production_companies.map((pc: any) => pc.name + ", ")}</b> <br />
+                            Genres: <b>{props.data.genres.map((g: any) => g.name + ", ")}</b> <br />
                             Titre du film: <b>{props.data.title}</b> <br />
                         </Grid>
                     </Grid>
                     <h2>Titre similaires</h2>
 
-                    <Stack flexWrap="wrap" direction="row" spacing={2}>
-                        <Box sx={{width: "300px", height: "250px", bgcolor:'red'}}>
+                    <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                        {similarMovies.map((m: MovieInterface) => {
+                            return (
+                                <Grid item xs={4} >
+                                    <Box sx={{
+                                        position: 'relative',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'left',
+                                        height: "150px",
+                                        '&::after': {
+                                            position: 'absolute',
+                                            content: '" "',
+                                            width: '100%',
+                                            height: '100%',
+                                            top: 0,
+                                            left: 0,
+                                            backgroundImage: `url(https://image.tmdb.org/t/p/original/${m.backdrop_path})`,
+                                            backgroundRepeat: "no-repeat",
+                                            backgroundSize: "cover",
+                                        }
 
-                        </Box>
-                        <Box sx={{width: "300px", height: "250px", bgcolor:'red'}}>
-
-                        </Box>
-                        <Box sx={{width: "300px", height: "250px", bgcolor:'red'}}>
-
-                        </Box>
-                        <Box sx={{width: "300px", height: "250px", bgcolor:'red'}}>
-
-                        </Box>
-                    </Stack>
+                                    }}>
+                                    </Box>
+                                    <Box sx={{
+                                        height: "120px",
+                                        bgcolor: "#545454",
+                                        width: "100%"
+                                    }}>
+                                        <Grid
+                                            container
+                                            direction="row"
+                                            justifyContent="space-between"
+                                            alignItems="end"
+                                            sx={{ py: 1, px: 1 }}
+                                        >
+                                            {new Date(m.release_date).getFullYear()}
+                                            <Button sx={{ bgcolor: "rgba(255, 255, 255, 0)", p: 0, minWidth: "0px" }}>
+                                                <Avatar sx={{ border: " 2px solid grey", bgcolor: "transparent" }}>
+                                                    < AddIcon sx={{ p: 0, m: 0, color: "#919191" }} fontSize='large' />
+                                                </Avatar>
+                                            </Button>
+                                        </Grid>
+                                        <Typography ml={1} noWrap >
+                                            {m.overview}
+                                        </Typography>
+                                    </Box>
+                                </Grid>
+                            )
+                        })}
+                    </Grid>
                 </Box>
             </Box>
         </Modal>

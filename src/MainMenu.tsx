@@ -3,7 +3,7 @@ import ToolBar from './ToolBar';
 import Typography from '@mui/material/Typography';
 import { useSelector, useDispatch } from 'react-redux';
 import { Movie } from './components/Movie';
-import { Button, Container, Stack } from '@mui/material';
+import { Button, Container, Grid, Stack } from '@mui/material';
 import { MoviesReducerInterface } from "./interfaces/MoviesReducerInterface";
 import { MovieInterface } from './interfaces/MovieInterface';
 import { MoviesSlide } from './components/MoviesSlide';
@@ -17,30 +17,45 @@ export default function MainMenu() {
     }
 
     const Movies = useSelector((state: State) => state.movies);
-    console.log(Movies);
-    
+
 
     return (
         <Box bgcolor="primary">
             <ToolBar display={""} />
             {Movies.popularMovies.length !== 0 &&
                 <>
-                    <Box bgcolor="red" sx={{
-                        width: "100%",
-                        height: "70vh",
-                        backgroundImage: 'url(https://image.tmdb.org/t/p/original/' + Movies.popularMovies[0].backdrop_path + ')',
-                        backgroundRepeat: "no-repeat",
-                        backgroundSize: "cover",
-                        mb: 2,
+                    <Box sx={{
+                        position: 'relative',
                         display: 'flex',
-                        alignContent: 'flex-end'
-                    }} >
-                        <Box sx={{ display: "inline", mb: 0 }}>
-                            <Box sx={{ mt: 60, ml: 5 }}>
+                        alignItems: 'end',
+                        justifyContent: 'center',
+                        height: "calc(100vh - 73.125px)",
+                        '&::after': {
+                            position: 'absolute',
+                            content: '""',
+                            width: '100%',
+                            height: '100%',
+                            top: 0,
+                            left: 0,
+                            backgroundImage: 'url(https://image.tmdb.org/t/p/original/' + Movies.popularMovies[0].backdrop_path + ')',
+                            backgroundRepeat: "no-repeat",
+                        }
+
+                    }}>
+                        <Grid
+                            container
+                            direction="row"
+                            justifyContent="space-between"
+                            alignItems="space-between"
+                            ml={5}
+                            mb={30}
+                            zIndex={100}
+                        >
+                            <Stack direction="row" spacing={1}>
                                 <Button startIcon={<PlayArrow />} sx={{ fontWeight: "bold", bgcolor: "white", color: "black", mr: 1 }} variant="contained">Lecture</Button>
                                 <Button startIcon={<InfoOutlined />} sx={{ fontWeight: "bold" }} variant="contained" >Plus d'infos</Button>
-                            </Box>
-                        </Box>
+                            </Stack>
+                        </Grid>
                     </Box>
                     <Stack sx={{ ml: 5 }} spacing={1}>
                         <MoviesSlide movieList={Movies.popularMovies} title={"Les plus gros succès de Netflix"} />
