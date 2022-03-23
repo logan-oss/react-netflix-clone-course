@@ -14,12 +14,11 @@ import { LoadingDataMovies } from "./actions/fetchApi";
 import AddProfile from "./AddProfile";
 
 export default () => {
-
-    useEffect(() => {
+    
+    /* useEffect(() => {
         LoadingDataMovies();
-    }, )
-    
-    
+    }, ) */
+
     return (
         <ThemeProvider theme={mainTheme.dark}>
             <CssBaseline />

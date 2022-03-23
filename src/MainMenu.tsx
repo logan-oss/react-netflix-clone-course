@@ -8,9 +8,14 @@ import { MoviesReducerInterface } from "./interfaces/MoviesReducerInterface";
 import { MovieInterface } from './interfaces/MovieInterface';
 import { MoviesSlide } from './components/MoviesSlide';
 import { InfoOutlined, PlayArrow } from '@mui/icons-material';
+import { useEffect } from 'react';
+import { LoadingDataMovies } from './actions/fetchApi';
 
 export default function MainMenu() {
 
+    useEffect(() => {
+        LoadingDataMovies();
+    }, )
 
     type State = {
         movies: MoviesReducerInterface

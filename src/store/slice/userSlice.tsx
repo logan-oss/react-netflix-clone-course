@@ -1,24 +1,29 @@
 import { combineReducers, createSlice } from '@reduxjs/toolkit'
+import User from '../../interfaces/UserInterface';
+import Users from '../../interfaces/UsersInterface';
 
-interface User {
-    name: string,
-    color: string
+
+const initUsers = new Array<User>();
+
+const initialState: Users = {
+    selectedUser: {name:"",color:""},
+    users: initUsers
 }
-
-const initialState: Array<User> = new Array<User>();
 
 export const userSlice = createSlice({
     name: 'users',
     initialState,
     reducers: {
-        addUser(state: Array<User>, action: any) {
-            state.push(action.payload);
+        addUser(state: Users, action: any) {
+            console.log(state.users);
+            
+            state.users[state.users.length] = action.payload;
         },
-        removeUser(state, action) {
-            state = state.filter((e) => e.name !== action.payload);
+        removeUser(state: Users, action) {
+            state.users = state.users.filter((e) => e.name !== action.payload);
         },
-        setUser(state, action) {
-            state[action.payload.index] = action.payload.user;
+        setUser(state: Users, action) {
+            state.users[action.payload.index] = action.payload.user;
         }
     }
 })

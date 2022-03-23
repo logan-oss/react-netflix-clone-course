@@ -1,24 +1,16 @@
-import * as React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 import ToolBar from './ToolBar';
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import { Avatar, Stack } from '@mui/material';
-import AssignmentIcon from '@mui/icons-material/Assignment';
+import { Avatar, Link, Stack } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { useSelector } from 'react-redux';
+import UsersInterface from './interfaces/UsersInterface';
+import User from './interfaces/UserInterface';
 
 export default function WhoIsWatching() {
 
-    const profiles = ["Nora", "Logan", "Paul"];
-    const colors = ["silver", "green", "red", "yellow", "orange", "pink", "purple"];
-    const random = () => { return Math.floor(Math.random() * colors.length) };
+    const users = useSelector((state: any) => state.users);
 
     return (
         <div>
@@ -31,26 +23,27 @@ export default function WhoIsWatching() {
                 }}
             >
                 <Box sx={{ fontSize: 'h3.fontSize' }}>Who's watching?</Box>
-                <Box sx={{ display: 'flex', justifyContent: 'center', mb:8 }}>
+                <Box sx={{ display: 'flex', justifyContent: 'center', mb: 8 }}>
                     <Stack sx={{ textAlign: 'center' }} direction="row" spacing={2}>
                         {
-                            profiles.map((profile) => <Box>
-                                <Avatar sx={{ bgcolor: colors[random()], width: '150px', height: "150px", fontSize: "50px", mb: 2 }} variant="square">
-                                    {profile[0]}
+                            users.users.map((profile: User) => <Box>
+                                <Avatar sx={{ bgcolor: profile.color, width: '150px', height: "150px", fontSize: "50px", mb: 2 }} variant="square">
+                                    {profile.name[0]}
                                 </Avatar>
-                                <Typography>{profile}</Typography>
+                                <Typography>{profile.name}</Typography>
                             </Box>)
                         }
-
                         <Box>
-                            <Avatar sx={{ bgcolor: "black", width: '150px', height: "150px", fontSize: "50px", mb: 2 }} variant="square">
-                                <AddCircleIcon color="primary" sx={{fontSize: 100}} />
-                            </Avatar>
-                            <Typography>Add Profile</Typography>
+                            <Link href="/addProfile">
+                                <Avatar sx={{ bgcolor: "black", width: '150px', height: "150px", fontSize: "50px", mb: 2 }} variant="square">
+                                    <AddCircleIcon color="primary" sx={{ fontSize: 100 }} />
+                                </Avatar>
+                                <Typography>Add Profile</Typography>
+                            </Link>
                         </Box>
                     </Stack>
                 </Box>
-                <Button variant="outlined" sx={{borderWidth:"2px", fontSize: "20px"}}>MANAGE PROFILES</Button>
+                <Button variant="outlined" sx={{ borderWidth: "2px", fontSize: "20px" }}>MANAGE PROFILES</Button>
             </div>,
         </div >
     );
