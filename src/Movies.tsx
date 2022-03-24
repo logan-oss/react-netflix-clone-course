@@ -1,33 +1,35 @@
 import Box from '@mui/material/Box';
-import ToolBar from './ToolBar';
-import Typography from '@mui/material/Typography';
-import { useSelector, useDispatch } from 'react-redux';
-import { Movie } from './components/Movie';
-import { Button, Container, Grid, Stack } from '@mui/material';
-import { MoviesReducerInterface } from "./interfaces/MoviesReducerInterface";
-import { MovieInterface } from './interfaces/MovieInterface';
-import { MoviesSlide } from './components/MoviesSlide';
+import ToolBar from './components/ToolBar';
+import { useSelector } from 'react-redux';
+import { Button, Grid, Stack } from '@mui/material';
+import { Slide } from './components/Slide';
 import { InfoOutlined, PlayArrow } from '@mui/icons-material';
 import { useEffect } from 'react';
-import { LoadingDataMovies } from './actions/fetchApi';
+import { LoadingDataMovies } from './actions/fetchApiMovies';
+import StateInterface from './interfaces/StateInterface';
+import React from 'react';
+import { CustomSlide } from './components/CustomSlide';
 
-export default function MainMenu() {
+export default function Movies() {
+
+    const [viewSearch, SetOnSearch] = React.useState(false)
 
     useEffect(() => {
         LoadingDataMovies();
-    }, )
+    }, [])
 
-    type State = {
-        movies: MoviesReducerInterface
-    }
+    const Movies = useSelector((state: StateInterface) => state.movies);
 
-    const Movies = useSelector((state: State) => state.movies);
-    console.log(Movies);
 
     return (
         <Box bgcolor="primary">
-            <ToolBar display={""} />
-            {((Movies.popularMovies.length !== 0)) &&
+            <ToolBar display={""} setOnSearch={SetOnSearch} />
+            {viewSearch ?
+                <>
+                    <CustomSlide type="movie" title={"Recherche sur le mot \""+ Movies.searchMovies.keyword + "\""} list={Movies.searchMovies.movies} />
+                </>
+                :
+                ((Movies.popularMovies.length !== 0)) &&
                 <>
                     <Box sx={{
                         position: 'relative',
@@ -63,12 +65,13 @@ export default function MainMenu() {
                         </Grid>
                     </Box>
                     <Stack sx={{ ml: 5 }} spacing={1}>
-                        <MoviesSlide movieList={Movies.popularMovies} title={"Les plus gros succès de Netflix"} />
-                        <MoviesSlide movieList={Movies.trendingMovies} title={"Tendances actuelles"} />
-                        <MoviesSlide movieList={Movies.topMovies} title={"Les mieux notés"} />
+                        <Slide type="movie" list={Movies.popularMovies} title={"Les plus gros succès de Netflix"} />
+                        <Slide type="movie" list={Movies.trendingMovies} title={"Tendances actuelles"} />
+                        <Slide type="movie" list={Movies.topMovies} title={"Les mieux notés"} />
                     </Stack>
                 </>
             }
+
         </Box>
     );
 }

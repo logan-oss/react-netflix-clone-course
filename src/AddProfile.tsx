@@ -1,9 +1,8 @@
 import Box from '@mui/material/Box';
-import ToolBar from './ToolBar';
+import ToolBar from './components/ToolBar';
 import Button from '@mui/material/Button';
 import { Avatar, FormControl, MenuItem, Select, SelectChangeEvent, Stack, TextField } from '@mui/material';
-import React, { useEffect } from 'react';
-import store from './store/store';
+import React from 'react';
 import { addUser } from './store/slice/userSlice';
 import { Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -21,10 +20,8 @@ export default function AddProfile() {
     }
 
     function submit(){
-        if(name !== ""){
-            console.log("test");
-            
-            dispatch(addUser({name:name,color: profileColor}));
+        if(name !== ""){     
+            dispatch(addUser({name:name,color: profileColor, movieList: []}));
             setRedirect(true);
         }
     }

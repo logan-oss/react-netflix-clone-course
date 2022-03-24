@@ -20,7 +20,7 @@ export const mainTheme = {
         },
     }),
 
-    "light" : createTheme({
+    "light": createTheme({
         palette: {
             primary: {
                 main: '#b7b7b7',

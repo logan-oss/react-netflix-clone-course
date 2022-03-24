@@ -1,19 +1,40 @@
 import Box from '@mui/material/Box';
-import ToolBar from './ToolBar';
+import ToolBar from './components/ToolBar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Avatar, Link, Stack } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { useSelector } from 'react-redux';
-import UsersInterface from './interfaces/UsersInterface';
-import User from './interfaces/UserInterface';
+import { useDispatch, useSelector } from 'react-redux';
+import User from './interfaces/user/UserInterface';
+import { Navigate, NavLink } from 'react-router-dom';
+import React from 'react';
+import { setSelectedUser } from './store/slice/userSlice';
+import StateInterface from './interfaces/StateInterface';
 
 export default function WhoIsWatching() {
 
-    const users = useSelector((state: any) => state.users);
+    const users = useSelector((state: StateInterface) => state.users);
+    const [selectedUser, setSelectUser] = React.useState({ name: "", color: "" });
+    const dispatch = useDispatch();
+
+    function setUser(u: User) {
+        dispatch(setSelectedUser(u));
+        setSelectUser(u);
+    }
+
+    const style = {
+        width: '150px',
+        height: "150px",
+        fontSize: "50px",
+        mb: 2,
+        '&:hover': {
+            border: '2px solid white'
+        }
+    }
 
     return (
         <div>
+            {selectedUser.name !== "" ? <Navigate to='/' /> : null}
             <ToolBar display={"logoOnly"} />
             <div
                 style={{
@@ -26,20 +47,20 @@ export default function WhoIsWatching() {
                 <Box sx={{ display: 'flex', justifyContent: 'center', mb: 8 }}>
                     <Stack sx={{ textAlign: 'center' }} direction="row" spacing={2}>
                         {
-                            users.users.map((profile: User) => <Box>
-                                <Avatar sx={{ bgcolor: profile.color, width: '150px', height: "150px", fontSize: "50px", mb: 2 }} variant="square">
+                            users.users.map((profile: User) => <NavLink onClick={() => { setUser(profile); }} to={''}>
+                                <Avatar sx={{ ...style, bgcolor: profile.color }} variant="square">
                                     {profile.name[0]}
                                 </Avatar>
                                 <Typography>{profile.name}</Typography>
-                            </Box>)
+                            </NavLink>)
                         }
                         <Box>
-                            <Link href="/addProfile">
-                                <Avatar sx={{ bgcolor: "black", width: '150px', height: "150px", fontSize: "50px", mb: 2 }} variant="square">
+                            <NavLink to="/addProfile">
+                                <Avatar sx={{ ...style, bgcolor: 'black' }} variant="square">
                                     <AddCircleIcon color="primary" sx={{ fontSize: 100 }} />
                                 </Avatar>
                                 <Typography>Add Profile</Typography>
-                            </Link>
+                            </NavLink>
                         </Box>
                     </Stack>
                 </Box>

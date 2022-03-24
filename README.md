@@ -1,5 +1,10 @@
 # react-netflix-clone-course
 
+# Important !!
+
+A faire avant de lancer l'application :
+- créer un fichier .env à la racine du projet et ajouter la variable REACT_APP_API_KEY qui contiendra la clé de l'api TMDB
+
 ## Features
 
 -   Login

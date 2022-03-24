@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box';
-import MovieComponentInterface from '../interfaces/propsInterface/BackdropComponentInterface';
+import MovieComponentInterface, { SerieComponentInterface } from '../interfaces/propsInterface/BackdropComponentInterface';
 import React from 'react';
-import MovieModal from './MovieModal';
-import MovieDetailsInterface from '../interfaces/movie/MovieDetailsInterface';
+import SerieModal from './SerieModal';
+import SerieDetailsInterface from '../interfaces/serie/SerieDetailsInterface';
 
-export function Movie(props: MovieComponentInterface) {
+export function SerieComponent(props: SerieComponentInterface) {
     const [openModal, setModal] = React.useState(false);
     const [modalData, setModalData] = React.useState({});
 
@@ -17,7 +17,7 @@ export function Movie(props: MovieComponentInterface) {
     }
 
     function getDetail() {
-        fetch("https://api.themoviedb.org/3/movie/"+ props.data.id + "?api_key=" + process.env.REACT_APP_API_KEY + "&language=fr-FR")
+        fetch("https://api.themoviedb.org/3/tv/"+ props.data.id + "?api_key=" + process.env.REACT_APP_API_KEY + "&language=fr-FR")
         .then(res => res.json())
         .then(
             (result) => {  
@@ -36,6 +36,7 @@ export function Movie(props: MovieComponentInterface) {
         width: "300px",
         height: "160px",
         transition: "transform .2s",
+        display:'inline-block',
         '&:hover': {
             transform: "scale(1.1)",
         }
@@ -52,7 +53,7 @@ export function Movie(props: MovieComponentInterface) {
                 }}>
             </Box>
             {openModal === true ?
-                <MovieModal data={modalData as MovieDetailsInterface} setModal={deleteModal} />
+                <SerieModal data={(modalData as SerieDetailsInterface)} setModal={deleteModal} />
                 :
                 null
             }

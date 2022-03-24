@@ -1,5 +1,5 @@
-import { MovieInterface } from "../MovieInterface"
-
-export default interface ToolbarInterface {
-    display: string
-}
+export type ToolbarInterface =
+    {
+        display: string,
+        setOnSearch?: (onSearch: boolean) => void;
+    };

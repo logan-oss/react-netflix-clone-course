@@ -1,4 +1,4 @@
-import { setPopularMovies, setTopMovies, setTrendingMovies } from "../store/slice/movieSlice";
+import { setPopularMovies, setSearchMovies, setTopMovies, setTrendingMovies } from "../store/slice/movieSlice";
 import store from "../store/store";
 
 const TRENDING_MOVIES = "TRENDING_MOVIES";
@@ -24,6 +24,16 @@ export function GetTrendingMovies() {
 export function GetTopRatedMovies() {
     console.log("getting trending movies ...");
     GetMovies("https://api.themoviedb.org/3/movie/top_rated", TOP_RATED_MOVIES);
+}
+
+export function GetSearchMovie(keyword: string) {
+    fetch('https://api.themoviedb.org/3/search/movie?api_key='+process.env.REACT_APP_API_KEY+'&query='+keyword)
+    .then(res => res.json())
+    .then(
+        (result) => {
+            store.dispatch(setSearchMovies({keyword: keyword, movies: result.results}));
+        }
+    );
 }
 
 function GetMovies(link: string, type: string) {

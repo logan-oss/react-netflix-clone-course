@@ -1,11 +1,15 @@
-import { MovieInterface } from "../../interfaces/MovieInterface";
-import { MoviesReducerInterface } from "../../interfaces/MoviesReducerInterface";
+import { MovieInterface } from "../../interfaces/movie/MovieInterface";
+import { MoviesReducerInterface } from "../../interfaces/movie/MoviesReducerInterface";
 import { combineReducers, createSlice } from '@reduxjs/toolkit'
 
 const initialState: MoviesReducerInterface = {
     popularMovies: new Array<MovieInterface>(),
     trendingMovies: new Array<MovieInterface>(),
     topMovies: new Array<MovieInterface>(),
+    searchMovies: {
+        keyword: "",
+        movies: new Array<MovieInterface>()
+    },
 };
 
 export const movieSlice = createSlice({
@@ -20,10 +24,13 @@ export const movieSlice = createSlice({
         },
         setTopMovies(state, action) {
             state.topMovies = action.payload;
+        },
+        setSearchMovies(state, action){
+            state.searchMovies = action.payload;
         }
     }
 })
 
-export const { setPopularMovies, setTrendingMovies, setTopMovies } = movieSlice.actions;
+export const { setPopularMovies, setTrendingMovies, setTopMovies, setSearchMovies } = movieSlice.actions;
 
 export default movieSlice.reducer;

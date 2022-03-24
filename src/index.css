@@ -12,3 +12,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+a:visited {
+  color: white;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+.profile:hover{
+  border: 2px solid white
+}
