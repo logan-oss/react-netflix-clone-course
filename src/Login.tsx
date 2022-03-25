@@ -10,17 +10,25 @@ import Button from '@mui/material/Button';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
-import { mainTheme } from './theme';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLogin } from './store/slice/loginSlice';
+import StateInterface from './interfaces/StateInterface';
+import { Navigate } from 'react-router-dom';
 
 export default function Login() {
+
+  const logged = useSelector((state: StateInterface) => state.login.isLogged);
+  const dispatch = useDispatch();
+
   return (
     <Box bgcolor="primary">
+      { (logged)  ? <Navigate to='/' /> : null}
       <ToolBar display={"logoOnly"} />
       <Container maxWidth="sm" sx={{ p: 2, bgcolor: 'primary', mt: 10 }}>
         <Typography color="white" sx={{ fontSize: "30px", fontWeight: 'bold', mb: 2 }}>Sign In</Typography>
         <TextField fullWidth id="outlined-basic" label={<Typography>Email or phone number</Typography>} variant="outlined" sx={{ bgcolor: "#707070", mb: 2 }} style={{ borderRadius: "3px" }} />
         <TextField fullWidth id="outlined-basic" label={<Typography>Password</Typography>} variant="outlined" sx={{ bgcolor: "#707070", mb: 4 }} style={{ borderRadius: "3px" }} />
-        <Button fullWidth variant="contained" sx={{ bgcolor: "red", py: 1, fontSize: "20px" }}>Sign in</Button>
+        <Button fullWidth variant="contained" sx={{ bgcolor: "red", py: 1, fontSize: "20px" }} onClick={() =>  {dispatch(setLogin(true))}}>Sign in</Button>
         <Box
           sx={{
             width: 1,

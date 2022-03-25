@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import ToolBar from './components/ToolBar';
 import { useSelector } from 'react-redux';
-import { Button, Grid, Stack } from '@mui/material';
+import { Button, Grid, Stack, Typography } from '@mui/material';
 import { Slide } from './components/Slide';
 import { InfoOutlined, PlayArrow } from '@mui/icons-material';
 import { useEffect } from 'react';
@@ -48,6 +48,9 @@ export default function MainMenu() {
                         }
 
                     }}>
+                        <Typography fontSize='70px' sx={{ position: 'absolute', zIndex: 200, top: '40%', maxWidth: "50%", left:0, ml:5 }}>
+                            {Series.popularSeries[0].name}
+                        </Typography>
                         <Grid
                             container
                             direction="row"

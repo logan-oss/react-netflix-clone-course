@@ -5,5 +5,8 @@ import UsersInterface from "./user/UsersInterface";
 export default interface StateInterface {
     movies: MoviesReducerInterface,
     users: UsersInterface,
-    series: SeriesReducerInterface
+    series: SeriesReducerInterface,
+    login: {
+        isLogged: boolean
+    }
 }

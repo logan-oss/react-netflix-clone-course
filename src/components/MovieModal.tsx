@@ -37,7 +37,7 @@ export default function MovieModal(props: MovieModalInterface) {
             .then(res => res.json())
             .then(
                 (result) => {
-                    setSimilarMovies(result.results.slice(0,6));
+                    setSimilarMovies(result.results.slice(0, 6));
                 },
             )
     }, []);
@@ -83,6 +83,9 @@ export default function MovieModal(props: MovieModalInterface) {
                         zIndex={200}
                     >
                         <Box sx={{ ml: 5 }}>
+                            <Typography fontSize='70px' sx={{ position: 'absolute', zIndex: 200, top: '40%', maxWidth:"50%" }}>
+                                {props.data.title}
+                            </Typography>
                             <Button startIcon={<PlayArrow />} sx={{ fontWeight: "bold", bgcolor: "white", color: "black" }} variant="contained">Lecture</Button>
                             <Stack direction="row" spacing={1} sx={{ display: "inline", ml: 1 }}>
                                 <Button sx={{ bgcolor: "rgba(255, 255, 255, 0)", p: 0, minWidth: "0px" }} onClick={() => dispatch(addMovieList(props.data))}>

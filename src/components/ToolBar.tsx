@@ -11,7 +11,7 @@ import InputBase from '@mui/material/InputBase';
 import { styled, alpha } from '@mui/material/styles';
 import { ToolbarInterface } from '../interfaces/propsInterface/ToolbarInterface';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { FormControl, TextField } from '@mui/material';
 import { GetSearchMovie } from '../actions/fetchApiMovies';
@@ -30,8 +30,6 @@ const links = [
 
 export default function ToolBar(props: ToolbarInterface) {
 
-    const users = useSelector((state: StateInterface) => state.users);
-    const [onPressTime, setOnPressTime] = React.useState(new Date().getTime());
     const [search, setSearch] = React.useState("");
     const store = useSelector((state: StateInterface) => state);
 
@@ -48,10 +46,10 @@ export default function ToolBar(props: ToolbarInterface) {
 
     // Supprime l'historique de la recherche
     useEffect(() => {
-        if(pathArray[pathArray.length -1] === "films")
-            dispatch(setSearchMovies({keyword: "", movies: []}));
+        if (pathArray[pathArray.length - 1] === "films")
+            dispatch(setSearchMovies({ keyword: "", movies: [] }));
         else
-            dispatch(setSearchSeries({keyword: "", series: []}));
+            dispatch(setSearchSeries({ keyword: "", series: [] }));
     }, [])
 
     // Création d'un timer pour evité de faire un appel Api a chaque onChange de la recherche
@@ -61,7 +59,7 @@ export default function ToolBar(props: ToolbarInterface) {
                 props.setOnSearch(false);
             }
             else {
-                
+
                 switch (pathArray[pathArray.length - 1]) {
                     case 'films':
                         if (store.movies.searchMovies.keyword !== search.trim()) {
@@ -69,8 +67,8 @@ export default function ToolBar(props: ToolbarInterface) {
                             props.setOnSearch(true);
                         }
                         break;
-                    case 'series' :              
-                        if (store.series.searchSeries.keyword !== search.trim()) {  
+                    case 'series':
+                        if (store.series.searchSeries.keyword !== search.trim()) {
                             GetSearchSeries(search);
                             props.setOnSearch(true);
                         }
@@ -137,8 +135,11 @@ export default function ToolBar(props: ToolbarInterface) {
                     <Toolbar disableGutters>
                         <img src="assets/images/logo.png" alt="" style={{ width: "130px", margin: "0px 16px" }} />
                         {props.display !== "logoOnly" &&
-
                             [
+                                <>
+                                    {((!store.login.isLogged) && (pathArray[pathArray.length - 1] !== 'login')) ? <Navigate to='/login' /> : null }
+                                    {((store.users.selectedUser.name === "") && (store.login.isLogged)) ? <Navigate to='/whoiswatching' /> : null}
+                                </>,
                                 <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, m: 2 }}>
                                     <Stack direction="row" spacing={3}>
                                         {
@@ -167,10 +168,10 @@ export default function ToolBar(props: ToolbarInterface) {
                                         </Search>
                                         <Tooltip title="Profil">
                                             <IconButton sx={{ p: 0 }}>
-                                                {users.selectedUser.name !== "" ?
+                                                {store.users.selectedUser.name !== "" ?
                                                     <NavLink to='/whoiswatching'>
-                                                        <Avatar sx={{ bgcolor: users.selectedUser.color }} variant="square">
-                                                            {users.selectedUser.name[0]}
+                                                        <Avatar sx={{ bgcolor: store.users.selectedUser.color }} variant="square">
+                                                            {store.users.selectedUser.name[0]}
                                                         </Avatar>
                                                     </NavLink>
 
