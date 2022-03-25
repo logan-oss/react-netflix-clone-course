@@ -26,3 +26,4 @@ A faire avant de lancer l'application :
 - Edit, delete d'un profile
 - suppression de films dans MyList
 - Page d'accueil et des nouveautés les plus regardées
+- Ajout d'une série à myList
